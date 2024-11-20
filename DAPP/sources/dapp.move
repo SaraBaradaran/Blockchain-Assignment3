@@ -5,7 +5,7 @@ module 0x1::dapp {
 
     // Structure to store participant information
     public struct Participant has key, store {
-	    id: UID,
+	id: UID,
         name: address, 
         account_value: u64, // Represents the state of each participant
     }
