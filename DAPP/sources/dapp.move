@@ -1,11 +1,11 @@
 module 0x1::dapp {
     use sui::coin::{Self, Coin};
     use sui::sui::SUI;
-    //use sui::event;
+    use sui::event;
 
     // Structure to store participant information
     public struct Participant has key, store {
-	id: UID,
+        id: UID,
         name: address, 
         account_value: u64, // Represents the state of each participant
     }
@@ -16,6 +16,18 @@ module 0x1::dapp {
         participants: vector<Participant>,
     }
     
+    public struct SuccessfulPaymentEvent has drop, copy, store {
+        payer: address,
+        payee: address,
+        amount: u64,
+    }
+
+    public struct FailedPaymentEvent has drop, copy, store {
+        payer: address,
+        payee: address,
+        amount: u64,
+    }
+
     fun init(ctx: &mut TxContext) { 
         initialize_participants(ctx);
     }
@@ -78,7 +90,10 @@ module 0x1::dapp {
         if (check_conditions(payer, payee, participant_list, 0)) { // Check if coditions are satisfied
             transfer::public_transfer(coin::split(coin, amount, ctx), payee);
             update_account_value(payer, payee, amount, participant_list);
-        };
+            event::emit(SuccessfulPaymentEvent { payer: payer, payee: payee, amount: amount });
+        } else {
+            event::emit(FailedPaymentEvent { payer: payer, payee: payee, amount: amount });
+        }
     }
     
     // Function for updating the account value (state) for each participant
