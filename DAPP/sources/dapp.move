@@ -1,4 +1,4 @@
-module 0x1::dapp {
+module 0x123::dapp {
     use sui::coin::{Self, Coin};
     use sui::sui::SUI;
     use sui::event;
