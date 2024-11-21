@@ -8,6 +8,6 @@ In the implemented DAPP, a shared object is first created and published into the
 You can compile the written contract by using the following commands:
 ```
 git clone https://github.com/SaraBaradaran/Blockchain-Assignment3
-cd DAPP/sources
+cd Blockchain-Assignment3/DAPP/sources
 sui move build
 ```
