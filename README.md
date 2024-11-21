@@ -1,1 +1,5 @@
 # Blockchain-Assignment3
+
+
+### DAPP Scenario
+In the implemented DAPP, first a shared object is created and published into the blockchain which contains the information of all 15 participants, including their state and addresses. Then, each participant can call the public entry function `pay` to pay other participants. When calling the function `pay` in a transaction, the aformentioned shared object sould be taken as an input as well. Accordingly, upon making a payment by calling `pay`, the contract will check if all participants, except the payer and the payee, have account value more than 0, then the payment would be successfull. Otherwise, the payment fails. Here, the account value represent the balance of each participant in the current DAPP. At the first step, each participant has an initial account value of 20. When a participant pays another participant by calling the `pay` function of the current contract (or DAPP), then the account value of the payer is reduced by the amount paid. Also, the account value of the payee is increased by the amount received.
